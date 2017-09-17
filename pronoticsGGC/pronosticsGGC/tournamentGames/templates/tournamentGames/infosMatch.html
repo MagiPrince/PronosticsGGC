@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+   <div class="match">
+		<h3>{{ match.gameName }}</h3>
+    	<h4>{{ match.matchName }}</h4>
+    	<p>{{ match.equipeOne }} VS {{ match.equipeTwo }}</p>
+    	<p>Le match commence : le {{ match.matchStarting|date:"d m Y" }} à {{ match.matchStarting|date:"H:i" }}</p>
+    </div>
+
+    {% if user.is_authenticated %}
+
+		{% if voted %}
+
+			<p>Vous avez déjà voté pour ce match ! </p>
+
+		{% else %}
+
+			{% csrf_token %}
+
+		    <form method="post" action=".">
+		    {% csrf_token %}
+		    <input type="hidden" name="voteTeam" value="{{ match.equipeOne_id }}">
+		    <input type="hidden" name="match" value="{{ match.id }}" />
+		    <a href="#" onclick = "document.forms[0].submit();return false;"> {{ match.equipeOne }}</a>
+		    </form>
+
+		    <form method="post" action=".">
+		    {% csrf_token %}
+		    <input type="hidden" name="voteTeamOpponent" value="{{ match.equipeTwo_id }}">
+		    <input type="hidden" name="match" value="{{ match.id }}" />
+		    <a href="#" onclick = "document.forms[1].submit();return false;"> {{ match.equipeTwo }}</a>
+		    </form>
+
+		{% endif %}
+
+	{% else %}
+
+		<p>Connectez-vous pour pouvoir voter ! </p>
+
+    {% endif %}
+
+
+{% endblock %}

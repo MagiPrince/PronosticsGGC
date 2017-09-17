@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Bienvenue sur le Ranking!</h2>
+    <div id="ranks">
+    {% for rank in listRanking %}
+    	<p>{{forloop.counter}}. {{rank.user}} : {{rank.nbGGCPoints}} {{rank.ratio}} %</p>
+    {% endfor %}
+    </div>
+{% endblock %}

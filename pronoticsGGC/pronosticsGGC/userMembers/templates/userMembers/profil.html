@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Bienvenue sur votre page de profil!</h2>
+    {% if user.is_authenticated %}
+    <div class="container">
+    	<p> Nom d'utilisateur : {{ user }} </p>
+    	<p> Prénom : {{ user.first_name }} </p>
+    	<p> Nom : {{ user.last_name }} </p>
+    	<p> Email : {{ user.email }} </p>
+    	<p> Points GGC : {{ user.profil.nbGGCPoints }} </p>
+    	<p> Ratio : {{ user.profil.ratio|floatformat:"0" }} % </p>
+    </div>
+    <div class="votesRecents">
+    	{% for vote in listVotes %}
+    		<p>{{vote.match}} : {{vote.vote}}</p>
+    	{% empty %}
+    	<p>Vous n'avez pas de vote en cours...</p>
+    	{% endfor %}
+
+    {% else %} Connectez-vous pour pouvoir accèder à votre profil
+    {% endif %}
+{% endblock %}

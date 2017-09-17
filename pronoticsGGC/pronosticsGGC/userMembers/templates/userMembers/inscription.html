@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Bienvenue sur le formulaire d'inscription!</h2>
+    {% if user.is_authenticated %} Déconnectez-vous pour pouvoir créer un nouveau compte
+    {% else %}
+	    {% if envoi %}Vous êtes bien inscrit !
+	    {% else %}
+	    <div class="container">
+			<form method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<input type="submit" value="S'inscrire" />
+			</form>
+		</div>
+		{% endif %}
+	{% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+     <link rel="stylesheet" href="/media/css/style.css" />
+     <title>{% block title %}Pronostics GGC 2017{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+           <ul>
+                <li><a href="/">Accueil</a></li>
+                <li><a href="/matchs/all">Matchs</a></li>
+                <li><a href="/classement/">Classement</a></li>
+                <li><a href="/contact/">Contact</a></li>
+           </ul>
+            {% if user.is_authenticated %}
+            Vous êtes connecté, {{ user.username }} !
+            <a href = "/deconnexion">Déconnexion</a>
+            <a href="/profil">Profil</a>
+            {% else %}
+            <a href = "/connexion">Connexion</a>
+            <a href = "/inscription">Inscription</a>
+            {% endif %}
+       </nav>
+       
+    </header>
+       <section id="content">
+           {% block content %}
+           {% endblock %}
+       </section>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Prêts à parier ? C'est par ici !</h2>
+    
+    <a href="/matchs/all">Tous les matchs</a>
+    {% for game in typeGames %}
+        <a href="/matchs/{{game.name}}">{{game.name}}</a>
+    {% endfor %}
+    {% for match in next_matchs %}
+    <a href="{% url 'infosMatch' match.id %}">
+    	<div class="matchs">
+    		<h3>{{ match.gameName }}</h3>
+        	<h4>{{ match.matchName }}</h4>
+        	<p>{{ match.equipeOne }}</p>
+        	<p>{{ match.equipeTwo }}</p>
+        </div>
+	</a>
+	{% empty %}
+	    <p>Aucun match prochainement...</p>
+	{% endfor %}
+
+{% endblock %}
